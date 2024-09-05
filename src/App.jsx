@@ -1,52 +1,44 @@
 import { useState } from "react";
-import Opener from "./components/Opener";
-import ShapeSwitcher from "./components/ShapeSwitcher";
-import PlayerNames from "./components/PlayerNames";
-import Scores from "./components/Scores";
-import Cell from "./components/Cell";
-import Turn from "./components/Turn";
-import { computeWinner } from "./handlers/functions";
+import ShapeSwitch from "@/components/ShapeSwitch";
+import PlayersBar from "@/components/PlayerNames";
+import Scores from "@/components/Scores";
+import Board from "@/components/Board";
+import Turn from "@/components/Turn";
+import { computeWinner } from "@/lib/handlers";
+import { initialBoard } from "@/lib/utils";
+import { RiCircleLine } from "react-icons/ri";
+import { RiCloseLargeLine } from "react-icons/ri";
+
+const o = <RiCircleLine />;
+const x = <RiCloseLargeLine />;
 
 export default function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState(initialBoard);
+  const [players, setPlayers] = useState(["Player 1", "Player 2"]);
+  const [scores, setScores] = useState([0, 0]);
   const [turn, setTurn] = useState(true);
-  const winnerSets = [
-    [board[0], board[1], board[2]],
-    [board[3], board[4], board[5]],
-    [board[6], board[7], board[8]],
-    [board[0], board[3], board[6]],
-    [board[1], board[4], board[7]],
-    [board[2], board[5], board[8]],
-    [board[0], board[4], board[8]],
-    [board[2], board[4], board[6]],
-  ];
+  const [p1Shape, setp1Shape] = useState(true);
+
+  const winner = computeWinner(board);
+
 
   function handleCellClick(index) {
-    if (!board[index]) {
+    if (!winner && !board[index]) {
       let nextBoard = [...board];
-      nextBoard[index] = turn ? "o" : "×";
+      nextBoard[index] = (turn && p1Shape) ? "o" : "x";
       setBoard(nextBoard);
       setTurn(!turn);
     }
   }
 
-  let winner = computeWinner(winnerSets);
-  
   return (
-    <div className="container bg-slate-200">
-      <main className="grid grid-cols-1 justify-items-center w-[90%] mx-auto">
+    <div className="bg-slate-300">
+      <main className="grid grid-cols-1 justify-items-center w-96 mx-auto bg-blue-200">
         <h1 className="text-center bg-slate-50">Gato</h1>
-        <Opener/>
-        <ShapeSwitcher></ShapeSwitcher>
-        <PlayerNames></PlayerNames>
-        <Scores></Scores>
-        <section className="grid grid-cols-3 w-full aspect-square ">
-          {board.map((e, i) => (
-            <Cell key={i} onClick={() => handleCellClick(i)}>
-              {board[i]}
-            </Cell>
-          ))}
-        </section>
+        <ShapeSwitch />
+        <PlayersBar />
+        <Scores />
+        <Board board={board} handleCellClick={handleCellClick} />
         <section>
           <Turn form="o" isYourTurn={turn === true}></Turn>
           <Turn form="×" isYourTurn={turn === false}></Turn>

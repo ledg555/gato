@@ -3,7 +3,7 @@ import { RiCircleLine } from "react-icons/ri";
 import { RiLoopLeftLine } from "react-icons/ri";
 import { RiCloseLargeLine } from "react-icons/ri";
 
-export default function ShapeSwitcher() {
+export default function ShapeSwitch() {
   return (
     <section className="flex justify-center items-center gap-1 w-1/3 text-center">
       <RiCircleLine />
