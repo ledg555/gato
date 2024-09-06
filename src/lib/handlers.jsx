@@ -22,5 +22,5 @@ export function computeWinner(board) {
     if (count[0] === 3) return 1;
     if (count[1] === 3) return 2;
   }
-  return board.every((cell) => cell !== null) ? 3 : null; //draw or -
+  return board.every((cell) => cell !== null) ? 3 : 0; //draw or -
 }
