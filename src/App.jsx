@@ -5,18 +5,17 @@ import Scores from "@/components/Scores";
 import Board from "@/components/Board";
 import VictoryMessage from "./components/VictoryMessage";
 import Turn from "@/components/Turn";
-import { computeWinner } from "@/lib/handlers";
+import { computeWinner, computeScores } from "@/lib/handlers";
 import { initialBoard } from "@/lib/utils";
 
 export default function App() {
   const [board, setBoard] = useState(initialBoard);
   const [players, setPlayers] = useState(["Player 1", "Player 2"]);
+  const [winner, setWinner] = useState(0);
   const [scores, setScores] = useState([0, 0]);
   const [opener, setOpener] = useState(true);
   const [p1Shape, setp1Shape] = useState(true);
   const [turn, setTurn] = useState(true);
-
-  const winner = computeWinner(board);
 
   function handlePlayersChange(player, newName) {
     let playersNewNames = [...players];
@@ -28,8 +27,12 @@ export default function App() {
     if (!winner && !board[index]) {
       let nextBoard = [...board];
       nextBoard[index] = turn && p1Shape ? "o" : "x";
+      let nextWinner = computeWinner(nextBoard);
+      let nextScores = computeScores(nextWinner, scores);
       setBoard(nextBoard);
       setTurn(!turn);
+      setWinner(nextWinner);
+      setScores(nextScores);
     }
   }
 
@@ -42,7 +45,7 @@ export default function App() {
           players={players}
           handlePlayersChange={handlePlayersChange}
         />
-        <Scores />
+        <Scores scores={scores} />
         <Board board={board} handleCellClick={handleCellClick} />
         <section>
           <Turn form="o" isYourTurn={turn === true}></Turn>

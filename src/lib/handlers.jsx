@@ -24,3 +24,12 @@ export function computeWinner(board) {
   }
   return board.every((cell) => cell !== null) ? 3 : 0; //draw or -
 }
+
+export function computeScores(winner, scores) {
+  if (winner === 1 || winner == 2) {
+    let newScores = [...scores];
+    winner === 1 ? (newScores[0] += 1) : (newScores[1] += 1);
+    return newScores;
+  }
+  return [...scores];
+}
