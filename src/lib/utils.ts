@@ -1,13 +1,13 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const initialBoard = Array(9).fill(null);
 
-export function computeWinner(board) {
+export function computeWinner(board, p1Shape) {
   const winnerSets = [
     [board[0], board[1], board[2]],
     [board[3], board[4], board[5]],
@@ -21,9 +21,9 @@ export function computeWinner(board) {
 
   for (let set of winnerSets) {
     let count = set.reduce(
-      (r, e) => {
-        if (e === "o") r[0] += 1;
-        if (e === "x") r[1] += 1;
+      (r, cell) => {
+        if (cell === "o") p1Shape ? (r[0] += 1) : (r[1] += 1);
+        if (cell === "x") p1Shape ? (r[1] += 1) : (r[0] += 1);
         return r;
       },
       [0, 0]

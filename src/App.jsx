@@ -14,8 +14,12 @@ export default function App() {
   const [winner, setWinner] = useState(0);
   const [scores, setScores] = useState([0, 0]);
   const [opener, setOpener] = useState(true);
-  const [p1Shape, setp1Shape] = useState(true);
+  const [p1Shape, setP1Shape] = useState(true);
   const [turn, setTurn] = useState(true);
+
+  function handleShapeChange() {
+    setP1Shape(!p1Shape);
+  }
 
   function handlePlayersChange(player, newName) {
     let playersNewNames = [...players];
@@ -26,8 +30,8 @@ export default function App() {
   function handleCellClick(index) {
     if (!winner && !board[index]) {
       let nextBoard = [...board];
-      nextBoard[index] = turn && p1Shape ? "o" : "x";
-      let nextWinner = computeWinner(nextBoard);
+      nextBoard[index] = p1Shape ? (turn ? "o" : "x") : (turn ? "x" : "o");
+      let nextWinner = computeWinner(nextBoard, p1Shape);
       let nextScores = computeScores(nextWinner, scores);
       setBoard(nextBoard);
       setTurn(!turn);
@@ -56,7 +60,7 @@ export default function App() {
     <div className="bg-slate-300">
       <main className="grid grid-cols-1 justify-items-center w-96 mx-auto bg-blue-200">
         <h1 className="text-center bg-slate-50">Gato</h1>
-        <ShapeSwitch />
+        <ShapeSwitch board={board} winner={winner} handleShapeChange={handleShapeChange} p1Shape={p1Shape}/>
         <PlayersBar
           players={players}
           handlePlayersChange={handlePlayersChange}
@@ -70,8 +74,16 @@ export default function App() {
         <VictoryMessage players={players} winner={winner} />
       </main>
       <footer>
-        <ResetBar board={board} winner={winner} scores={scores} resetBoard={handleResetBoard} resetScores={handleResetScores}></ResetBar>
-        <p className="text-center">Made by <a href="/">ledg555</a></p>
+        <ResetBar
+          board={board}
+          winner={winner}
+          scores={scores}
+          resetBoard={handleResetBoard}
+          resetScores={handleResetScores}
+        ></ResetBar>
+        <p className="text-center">
+          Made by <a href="https://github.com/ledg555">@ledg555</a>
+        </p>
       </footer>
     </div>
   );
