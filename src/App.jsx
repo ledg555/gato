@@ -17,6 +17,12 @@ export default function App() {
   const [p1Shape, setP1Shape] = useState(true);
   const [turn, setTurn] = useState(true);
 
+  function handleOpenerChange() {
+    const newOpener = !opener;
+    setOpener(newOpener);
+    setTurn(newOpener);
+  }
+
   function handleShapeChange() {
     setP1Shape(!p1Shape);
   }
@@ -64,6 +70,9 @@ export default function App() {
         <PlayersBar
           players={players}
           handlePlayersChange={handlePlayersChange}
+          board={board}
+          winner={winner}
+          handleOpenerChange={handleOpenerChange}
         />
         <Scores scores={scores} />
         <Board board={board} handleCellClick={handleCellClick} />
