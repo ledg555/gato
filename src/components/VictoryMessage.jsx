@@ -1,16 +1,16 @@
 export default function VictoryMessage({ players, winner }) {
-  let formattedPlayer = "";
+  let message = "";
   switch (winner) {
-    case 0:
-      return <h2 className="h-min text-center pb-2 pt-4">hola</h2>;
     case 1:
     case 2:
-      formattedPlayer = players[winner - 1];
-      formattedPlayer.charAt(formattedPlayer.length - 1) === "s"
-        ? (formattedPlayer += "'")
-        : (formattedPlayer += "'s");
-      return <h2 className="h-min pb-2 pt-4">{formattedPlayer} victory!</h2>;
+      message = players[winner - 1];
+      message.charAt(message.length - 1) === "s"
+        ? (message += "'")
+        : (message += "'s");
+      message += " victory!";
+      break;
     case 3:
-      return <h2 className="h-min pb-2 pt-4">Draw!</h2>;
+      message = "Draw!";
   }
+  return <h2 className="pb-1 pt-5 h-14 font-bold text-xl">{message}</h2>;
 }

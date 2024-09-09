@@ -9,14 +9,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default:
+          "bg-primary text-primary-foreground [&:not(:focus)]:shadow hover:bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        hyperDestructive: "bg-destructive-foreground text-destructive hover:bg-destructive/90",
+          "bg-destructive-foreground text-destructive [&:not(:focus)]:shadow hover:bg-destructive/5 focus:bg-destructive/5 focus:shadow-inner",
+        hyperDestructive:
+          "bg-destructive text-destructive-foreground [&:not(:focus)]:shadow hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:shadow-inner",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-background text-secondary-foreground [&:not(:focus)]:shadow hover:bg-secondary/80 focus:bg-secondary/60 focus:shadow-inner",
+        icon: "bg-background text-sky-600 disabled:text-sky-300 disabled:cursor-not-allowed [&:not(:focus)]:shadow hover:bg-secondary/80 focus:bg-secondary/60 focus:shadow-inner",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -32,7 +35,7 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
