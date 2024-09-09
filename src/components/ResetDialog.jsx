@@ -36,8 +36,13 @@ export default function ResetDialog({ type, reseter }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="text-end">
-          <AlertDialogCancel className="w-20 mx-3">Cancel</AlertDialogCancel>
-          <AlertDialogAction className="w-20" onClick={reseter}>
+          <AlertDialogCancel className="w-20 mx-3 border-0 bg-background text-secondary-foreground [&:not(:focus)]:shadow hover:bg-secondary/90 focus:bg-nackground focus:shadow-inner">
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            className="w-20 bg-primary text-primary-foreground [&:not(:focus)]:shadow hover:bg-background hover:text-primary focus:bg-background focus:text-primary focus:shadow-inner"
+            onClick={reseter}
+          >
             Accept
           </AlertDialogAction>
         </div>

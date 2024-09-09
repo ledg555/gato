@@ -6,7 +6,7 @@ export default function Board({board, handleCellClick}) {
     const o = <RiCircleLine className="text-cyan-400" />;
     const x = <RiCloseLargeLine className="text-red-400"/>;
   return (
-    <section className="grid grid-cols-3 content-center w-3/4 aspect-square cell">
+    <section className="grid grid-cols-3 content-center w-3/4 aspect-square shadow rounded-md">
       {board.map((cell, i) => (
         <Cell key={i} onClick={() => handleCellClick(i)}>
           {cell === "o" && o}
