@@ -9,9 +9,10 @@ export default function ResetBar({
   resetScores,
 }) {
   return (
-    <section className="grid grid-cols-2 justify-items-center w-72 mx-auto">
+    <section className="grid grid-cols-2 justify-items-center w-72 h-min mx-auto pt-2">
       {winner || board.every((cell) => cell === null) ? (
         <Button
+        variant="destructive"
           className="w-28"
           disabled={!winner}
           onClick={resetBoard}
@@ -22,7 +23,7 @@ export default function ResetBar({
         <ResetDialog type="board" reseter={resetBoard}></ResetDialog>
       )}
       {scores.every((score) => score === 0) ? (
-        <Button className="w-28" disabled>
+        <Button variant="hyperDestructive" className="w-28" disabled>
           Reset scores
         </Button>
       ) : (

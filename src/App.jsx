@@ -5,7 +5,6 @@ import Scores from "@/components/Scores";
 import Board from "@/components/Board";
 import VictoryMessage from "./components/VictoryMessage";
 import ResetBar from "./components/ResetBar";
-import Turn from "@/components/Turn";
 import { initialBoard, computeWinner, computeScores } from "@/lib/utils";
 
 export default function App() {
@@ -36,7 +35,7 @@ export default function App() {
   function handleCellClick(index) {
     if (!winner && !board[index]) {
       let nextBoard = [...board];
-      nextBoard[index] = p1Shape ? (turn ? "o" : "x") : (turn ? "x" : "o");
+      nextBoard[index] = p1Shape ? (turn ? "o" : "x") : turn ? "x" : "o";
       let nextWinner = computeWinner(nextBoard, p1Shape);
       let nextScores = computeScores(nextWinner, scores);
       setBoard(nextBoard);
@@ -55,7 +54,7 @@ export default function App() {
 
   function handleResetScores() {
     const clearedBoard = [...initialBoard];
-    const clearedScores = [0,0];
+    const clearedScores = [0, 0];
     setBoard(clearedBoard);
     setScores(clearedScores);
     setWinner(0);
@@ -63,12 +62,20 @@ export default function App() {
   }
 
   return (
-    <div className="bg-slate-300">
-      <main className="grid grid-cols-1 justify-items-center w-96 mx-auto bg-blue-200">
-        <h1 className="text-center bg-slate-50">Gato</h1>
-        <ShapeSwitch board={board} winner={winner} handleShapeChange={handleShapeChange} p1Shape={p1Shape}/>
+    <div className="grid grid-cols-1 justify-center content-between min-h-screen min-w-screen">
+      <header>
+        <h1 className="text-center text-5xl py-6 h-min font-bold"># TicTapToe #</h1>
+      </header>
+      <main className="grid grid-cols-1 justify-items-center content-start w-80 mx-auto">
+        <ShapeSwitch
+          board={board}
+          winner={winner}
+          handleShapeChange={handleShapeChange}
+          p1Shape={p1Shape}
+        />
         <PlayersBar
           players={players}
+          turn={turn}
           handlePlayersChange={handlePlayersChange}
           board={board}
           winner={winner}
@@ -76,22 +83,18 @@ export default function App() {
         />
         <Scores scores={scores} />
         <Board board={board} handleCellClick={handleCellClick} />
-        <section>
-          <Turn form="o" isYourTurn={turn === true}></Turn>
-          <Turn form="×" isYourTurn={turn === false}></Turn>
-        </section>
         <VictoryMessage players={players} winner={winner} />
-      </main>
-      <footer>
         <ResetBar
           board={board}
           winner={winner}
           scores={scores}
           resetBoard={handleResetBoard}
           resetScores={handleResetScores}
-        ></ResetBar>
-        <p className="text-center">
-          Made by <a href="https://github.com/ledg555">@ledg555</a>
+        />
+      </main>
+      <footer>
+        <p className="text-center h-min py-2">
+          Made by <a href="https://github.com/ledg555" className="text-cyan-500 hover:text-cyan-400">@ledg555</a>
         </p>
       </footer>
     </div>
