@@ -63,8 +63,10 @@ export default function App() {
 
   return (
     <div className="grid grid-cols-1 justify-center content-around min-h-full min-w-screen">
-      <header>
-        <h1 className="text-center text-4xl sm:text-5xl py-3 sm:py-5 h-min font-bold"># TicTapToe #</h1>
+      <header className="shadow">
+        <h1 className="text-center text-4xl sm:text-5xl py-3 sm:py-5 h-min font-bold">
+          # TicTapToe #
+        </h1>
       </header>
       <main className="grid grid-cols-1 justify-items-center content-start w-80 mx-auto">
         <ShapeSwitch
@@ -94,7 +96,13 @@ export default function App() {
       </main>
       <footer>
         <p className="text-center h-min pt-6 pb-2">
-          Made by <a href="https://github.com/ledg555" className="text-cyan-500 hover:text-cyan-400">@ledg555</a>
+          Made by{" "}
+          <a
+            href="https://github.com/ledg555"
+            className="text-cyan-500 hover:text-cyan-400"
+          >
+            @ledg555
+          </a>
         </p>
       </footer>
     </div>

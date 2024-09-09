@@ -12,9 +12,9 @@ const buttonVariants = cva(
         default:
           "bg-primary text-primary-foreground [&:not(:focus)]:shadow hover:bg-primary/90",
         destructive:
-          "bg-destructive-foreground text-destructive [&:not(:focus)]:shadow hover:bg-destructive/5 focus:bg-destructive/5 focus:shadow-inner",
+          "bg-destructive-foreground/50 text-destructive [&:not(:focus)]:shadow hover:bg-destructive/5 focus:bg-destructive/5 focus:shadow-inner",
         hyperDestructive:
-          "bg-destructive text-destructive-foreground [&:not(:focus)]:shadow hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:shadow-inner",
+          "bg-destructive text-destructive-foreground [&:not(:focus)]:shadow hover:bg-destructive/5 hover:text-destructive focus:bg-destructive/5 focus:text-destructive focus:shadow-inner",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
