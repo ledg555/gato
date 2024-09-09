@@ -15,7 +15,12 @@ export default function ResetDialog({ type, reseter }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="w-28">Reset {type === "board" ? "board" : "scores"}</Button>
+        <Button
+          variant={type === "board" ? "destructive" : "hyperDestructive"}
+          className="w-28"
+        >
+          Reset {type === "board" ? "board" : "scores"}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="flex flex-col">
         <AlertDialogHeader className="text-start">
@@ -31,9 +36,7 @@ export default function ResetDialog({ type, reseter }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="text-end">
-          <AlertDialogCancel className="w-20 mx-3">
-            Cancel
-          </AlertDialogCancel>
+          <AlertDialogCancel className="w-20 mx-3">Cancel</AlertDialogCancel>
           <AlertDialogAction className="w-20" onClick={reseter}>
             Accept
           </AlertDialogAction>

@@ -5,9 +5,10 @@ import { RiCloseLargeLine } from "react-icons/ri";
 
 export default function ShapeSwitch({board, winner, p1Shape, handleShapeChange}) {
   return (
-    <section className="flex justify-center items-center gap-1 w-1/3 text-center">
+    <section className="flex justify-center items-center gap-2 w-1/2 h-min text-center pb-2">
       {p1Shape ? <RiCircleLine /> : <RiCloseLargeLine />}
       <Button
+      variant="secondary"
         disabled={!(winner || board.every((cell) => cell === null))}
         onClick={handleShapeChange}
       >
